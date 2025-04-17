@@ -1,0 +1,189 @@
+<html>
+<head>
+    <title>Contact Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: #333;
+            text-align: center;
+            background-color: #f0f0f0;
+            background-image: linear-gradient(45deg, rgba(0,0,0,0.6) 25%, transparent 25%), 
+                              linear-gradient(-45deg, rgba(0,0,0,0.6) 25%, transparent 25%);
+            background-size: 4px 4px;  
+            background-position: 0 0, 20px 20px; 
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('minx.jpg'); 
+            background-size: cover;
+            background-position: center;
+            animation: changeBackground 30s infinite;
+            z-index: -1;
+        }
+
+        @keyframes changeBackground {
+            0% { background-image: url('minx.jpg'); }
+            20% { background-image: url('min0.jpg'); }
+            40% { background-image: url('min1.jpg'); }
+            60% { background-image: url('min3.jpg'); }
+            80% { background-image: url('min2.jpg'); }
+            100% { background-image: url('min.jpg'); }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 20px; 
+            z-index: 1000;
+        }
+
+        .navbar .logo-img {
+            width: 150px; 
+            height: auto;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.6); 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .contact-form .form-control {
+            background-color: rgba(249, 249, 249, 0.8);
+        }
+
+        .contact-form .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .contact-form .btn-primary {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #2ECC71, #1ABC9C);
+            color: white;
+            padding: 20px 40px;
+            font-size: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="navbar">
+        <a href="intro.html">
+            <img src="clogo.png" alt="logo" class="logo-img">
+        </a>
+    </div>
+
+    <div class="success-message" id="successMessage">
+        Thank you for reaching out! We'll get back to you soon.
+    </div>
+
+    <div class="container">
+        <div class="contact-form">
+            <h2 class="fw-bold text-center">Contact Us</h2>
+            <form id="contactForm">
+                
+                <div class="mb-3">
+                    <label for="name" class="form-label">Your Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Your Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email">
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">Your Message</label>
+                    <textarea id="message" name="message" class="form-control" rows="3" placeholder="Enter your message"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var isValid = true;
+
+            var name = document.getElementById('name');
+            var email = document.getElementById('email');
+            var message = document.getElementById('message');
+
+            var namePattern = /^[A-Za-z\s]+$/;
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            document.querySelectorAll('.error-message').forEach(function(e) {
+                e.remove();
+            });
+
+            function showError(input, message) {
+                var error = document.createElement('div');
+                error.className = 'error-message text-danger mt-1';
+                error.innerText = message;
+                input.classList.add('is-invalid');
+                input.parentNode.appendChild(error);
+                isValid = false;
+            }
+
+            if (name.value.trim() === '') showError(name, "Name is required.");
+            else if (!namePattern.test(name.value.trim())) showError(name, "Only letters are allowed in Name.");
+
+            if (email.value.trim() === '') showError(email, "Email is required.");
+            else if (!emailPattern.test(email.value.trim())) showError(email, "Enter a valid email (e.g., example@mail.com).");
+
+            if (message.value.trim() === '') showError(message, "Message cannot be empty.");
+
+            if (isValid) {
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('successMessage').style.display = 'none';
+                    document.getElementById('contactForm').reset();
+                }, 3000);
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

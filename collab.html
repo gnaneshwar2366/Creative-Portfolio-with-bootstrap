@@ -1,0 +1,123 @@
+<html>
+<head>
+    <title>Collaboration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Background Video */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Navbar */
+        nav a {
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #00ffcc !important;
+            color: black !important;
+        }
+
+        /* Collaboration Section */
+        .collab-container {
+            text-align: center;
+            padding: 80px 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+        }
+
+        .collab-container h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .collab-container p {
+            font-size: 18px;
+            max-width: 900px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        /* Reach Out Button */
+        .collab-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            background-color: #00ffcc;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .collab-button:hover {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body class="text-light bg-dark">
+    
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="collab.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Navbar -->
+    <header class="d-flex justify-content-between align-items-center py-2 px-3"style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="logo">
+            <a href="intro.html">
+                <img src="clogo.png" alt="logo" class="img-fluid" style="width: 200px;">
+            </a>
+        </div>
+        <nav>
+            <a href="about.html" class="text-light text-decoration-none px-3">About</a>
+            <a href="contact.html" target="_blank" class="text-light text-decoration-none px-3">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Collaboration Section -->
+    <section class="collab-container">
+        <h1>Collaborate with Me!</h1>
+        <p>
+            If you're passionate about collaborating on exciting and innovative projects, I'd love to hear from you!  
+            I'm always open to exploring new ideas, brainstorming creative ventures, and working together to bring something unique to life.  
+            Whether you have a fresh concept in mind or are looking to connect with like-minded individuals.  
+            <br><br>
+            <h2>Why Collaborating with Me Will Benefit You</h2>  
+            <br>
+            Collaborating with me means implementing your concepts in a creative, professional setting.  
+            I'm dedicated to providing top-notch work and always open to fresh ideas and approaches.  
+            Our partnership will be mutually beneficial—whether your goals are to expand your project, gain fresh perspectives,  
+            or connect with a passionate team.  
+            <br><br>
+            By working together, we can pool our talents and strengths to create something profitable and entertaining for all.  
+            Let's work together to achieve amazing things!  
+            <br> Feel free to reach out. Let's create something amazing together!
+        </p>
+
+        <a href="collab-form.html" class="collab-button" target="_blank">Reach Out</a>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
