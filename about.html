@@ -1,0 +1,98 @@
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Background Video */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Navbar */
+        nav a {
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: #00ffcc !important;
+            color: black !important;
+        }
+
+        /* About Section */
+        .about-container {
+            padding: 80px 15px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+        }
+
+        .vision-heading {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00ffcc;
+            margin-top: 20px;
+        }
+
+        .vision-text {
+            font-size: 18px;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="text-light bg-dark">
+    
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="exp2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Navbar -->
+    <header class="d-flex justify-content-between align-items-center py-2 px-3" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="logo">
+            <a href="intro.html">
+                <img src="logo 1.png" alt="logo" class="img-fluid" style="width: 200px;">
+            </a>
+        </div>
+        <nav>
+            <a href="Works.html" class="text-light text-decoration-none px-3">Works</a>
+            <a href="collab.html" class="text-light text-decoration-none px-3">Collab</a>
+            <a href="contact.html" class="text-light text-decoration-none px-3">Contact</a>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-container">
+        <h1 class="fw-bold">Narrative Writer</h1>
+        <h3 class="fst-italic">"To craft timeless stories that resonate deeply and inspire the coming-up generations."</h3>
+
+        <div class="vision-heading">Vision</div>
+        <div class="vision-text">
+            I want to create stories that connect with people; stories that make them laugh, cry, and feel deeply moved. I want to create stories that are loved and relatable.  
+            <br><br>
+            By pushing myself with projects across various genres and experimenting with fresh expressive approaches, I strive to break free from conventional boundaries. I truly believe I can write stories that transcend regional and cultural barriers.  
+            <br><br>
+            I believe in the power of storytelling to connect people and evoke emotions. Every project I undertake is an opportunity to push my creative limits and explore the depths of life. I want my stories to not only entertain but also inspire.
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

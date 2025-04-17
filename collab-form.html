@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaboration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Background Video */
+        .video-back {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .video-back video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        /* Form Container */
+        .collab-form {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .collab-form h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #2ECC71, #1ABC9C);
+            color: white;
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(26, 188, 156, 0.3);
+            text-align: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+            max-width: 90%;
+            width: 350px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+    </style>
+</head>
+<body class="text-light bg-dark">
+    
+    <!-- Background Video -->
+    <div class="video-back">
+        <video autoplay muted loop>
+            <source src="cexp.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        We appreciate your interest! Your request has been received, and we’ll be in touch soon! 🎉
+    </div>
+
+    <!-- Collaboration Form -->
+    <div class="container">
+        <div class="collab-form">
+            <h2>Collaboration Form</h2>
+            <form id="collabForm" action="https://formspree.io/f/xwpvpyna" method="POST">
+                
+                <!-- Pen Name -->
+                <div class="mb-3">
+                    <label for="pen-name" class="form-label text-light">Pen Name</label>
+                    <input type="text" id="pen-name" name="pen-name" class="form-control" placeholder="Enter your pen name" required>
+                </div>
+
+                <!-- Who Are You -->
+                <div class="mb-3">
+                    <label for="real-name" class="form-label text-light">Who are you?</label>
+                    <input type="text" id="real-name" name="real-name" class="form-control" placeholder="Say about yourself, Who you really are?" required>
+                </div>
+
+                <!-- Previous Works -->
+                <div class="mb-3">
+                    <label for="previous-works" class="form-label text-light">Previous Works</label>
+                    <textarea id="previous-works" name="previous-works" class="form-control" rows="3" placeholder="Tell me about your previous works" required></textarea>
+                </div>
+
+                <!-- Why Collaborate -->
+                <div class="mb-3">
+                    <label for="why-collab" class="form-label text-light">Why do you want to collaborate with me?</label>
+                    <textarea id="why-collab" name="why-collab" class="form-control" rows="3" placeholder="Explain why you want to work with me" required></textarea>
+                </div>
+
+                <!-- Portfolio URL -->
+                <div class="mb-3">
+                    <label for="portfolio-url" class="form-label text-light">Portfolio URL</label>
+                    <input type="url" id="portfolio-url" name="portfolio-url" class="form-control" placeholder="Provide a link to your portfolio" required>
+                </div>
+
+                <input type="hidden" name="_replyto" value="your-email@example.com">
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('collabForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                form.reset(); 
+            }, 3000);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
