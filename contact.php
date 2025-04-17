@@ -1,3 +1,46 @@
+<?php
+$success_message = '';
+$error_message = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form data
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $message = trim($_POST['message'] ?? '');
+    
+    // Validate inputs
+    $errors = [];
+    
+    if (empty($name)) {
+        $errors[] = "Name is required";
+    } elseif (!preg_match("/^[A-Za-z\s]+$/", $name)) {
+        $errors[] = "Only letters are allowed in Name";
+    }
+    
+    if (empty($email)) {
+        $errors[] = "Email is required";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format";
+    }
+    
+    if (empty($message)) {
+        $errors[] = "Message is required";
+    }
+    
+    // If no errors, process the form
+    if (empty($errors)) {
+        // Here you would typically send an email or save to database
+        // For now, we'll just show a success message
+        $success_message = "Thank you for your message! We'll get back to you soon.";
+        
+        // Clear the form
+        $name = $email = $message = '';
+    } else {
+        $error_message = implode("<br>", $errors);
+    }
+}
+?>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Contact Form</title>
@@ -80,26 +123,8 @@
             font-size: 18px;
         }
 
-        .success-message {
-            display: none;
-            background: linear-gradient(135deg, #2ECC71, #1ABC9C);
-            color: white;
-            padding: 20px 40px;
-            font-size: 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -60%); }
-            to { opacity: 1; transform: translate(-50%, -50%); }
+        .alert {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -111,28 +136,34 @@
         </a>
     </div>
 
-    <div class="success-message" id="successMessage">
-        Thank you for reaching out! We'll get back to you soon.
-    </div>
-
     <div class="container">
         <div class="contact-form">
             <h2 class="fw-bold text-center">Contact Us</h2>
-            <form id="contactForm">
-                
+            
+            <?php if ($success_message): ?>
+                <div class="alert alert-success"><?php echo $success_message; ?></div>
+            <?php endif; ?>
+            
+            <?php if ($error_message): ?>
+                <div class="alert alert-danger"><?php echo $error_message; ?></div>
+            <?php endif; ?>
+
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="mb-3">
                     <label for="name" class="form-label">Your Name</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name">
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" 
+                           value="<?php echo htmlspecialchars($name ?? ''); ?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Your Email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email"
+                           value="<?php echo htmlspecialchars($email ?? ''); ?>">
                 </div>
 
                 <div class="mb-3">
                     <label for="message" class="form-label">Your Message</label>
-                    <textarea id="message" name="message" class="form-control" rows="3" placeholder="Enter your message"></textarea>
+                    <textarea id="message" name="message" class="form-control" rows="3" placeholder="Enter your message"><?php echo htmlspecialchars($message ?? ''); ?></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -140,50 +171,6 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            var isValid = true;
-
-            var name = document.getElementById('name');
-            var email = document.getElementById('email');
-            var message = document.getElementById('message');
-
-            var namePattern = /^[A-Za-z\s]+$/;
-            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-            document.querySelectorAll('.error-message').forEach(function(e) {
-                e.remove();
-            });
-
-            function showError(input, message) {
-                var error = document.createElement('div');
-                error.className = 'error-message text-danger mt-1';
-                error.innerText = message;
-                input.classList.add('is-invalid');
-                input.parentNode.appendChild(error);
-                isValid = false;
-            }
-
-            if (name.value.trim() === '') showError(name, "Name is required.");
-            else if (!namePattern.test(name.value.trim())) showError(name, "Only letters are allowed in Name.");
-
-            if (email.value.trim() === '') showError(email, "Email is required.");
-            else if (!emailPattern.test(email.value.trim())) showError(email, "Enter a valid email (e.g., example@mail.com).");
-
-            if (message.value.trim() === '') showError(message, "Message cannot be empty.");
-
-            if (isValid) {
-                document.getElementById('successMessage').style.display = 'block';
-                setTimeout(function() {
-                    document.getElementById('successMessage').style.display = 'none';
-                    document.getElementById('contactForm').reset();
-                }, 3000);
-            }
-        });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+</html> 
